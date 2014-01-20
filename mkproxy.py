@@ -1,15 +1,18 @@
 import re
+import os
 
 proxyhtml = open('proxy.html','r')
-try:
+proxys = []
+if os.path.isfile('proxy.txt'):
     proxytxt  = open('proxy.txt','r')
     proxys = proxytxt.readlines()
     for i in range(len(proxys)):
         proxys[i] = proxys[i].strip('\n')
-    print(proxys)
 
 proxytxt = open('proxy.txt','a')
 
+new_num = 0
+same_num = 0
 for line in proxyhtml.readlines():
     if '@' in line:
         data = re.findall(r'\d+.\d+.\d+.\d+:\d+',line) 
@@ -17,6 +20,10 @@ for line in proxyhtml.readlines():
             for proxy in data:
                 if proxy not in proxys:
                     proxytxt.write(data[0] + '\n')
-                    print(proxy)
+                    new_num += 1
+                else:
+                    same_num += 1
 
+print(str(same_num)+' proxys are the same!')                    
+print(str(new_num)+' proxys added!')
 

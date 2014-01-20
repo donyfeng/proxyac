@@ -1,0 +1,49 @@
+import urllib.request
+import random
+import time
+
+user_agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25"
+access_url = 'http://www.hd4fans.org/promotionlink.php?key=fe5aac9e58e45867ebaa1ac44e214505'
+
+def BuildOpener(proxy_addr):
+    proxy_handler = urllib.request.ProxyHandler({'http': proxy_addr})
+    opener = urllib.request.build_opener(proxy_handler)
+    return opener
+
+def BuildReq(url):
+    req = urllib.request.Request(url)
+    req.add_header('User-Agent',user_agent)
+    return req
+
+if __name__ == '__main__':
+    while 1:
+        fp = open('data.html','wb')
+
+        proxys = open('proxy.txt','r').readlines()
+        num = random.randint(0,len(proxys))
+        proxy_addr = proxys.pop(num).strip('\n')
+        
+        proxy_fp = open('proxy.txt','w') 
+        for proxy in proxys:
+            proxy_fp.write(proxy)
+
+        print('-------><--------')
+        print(time.strftime('%c',time.localtime()))
+        print(proxy_addr)
+
+        opener = BuildOpener(proxy_addr)
+        req = BuildReq(access_url)
+        
+        try:
+            data = opener.open(req).read()
+            fp.write(data)
+        except:
+            print('Error!')
+        else:
+            print('succeeded!')
+            time.sleep(100)
+
+
+
+    
+
