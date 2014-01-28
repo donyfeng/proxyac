@@ -1,6 +1,7 @@
 import urllib.request
 import random
 import time
+import socket
 
 user_agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25"
 access_url = 'http://www.hd4fans.org/promotionlink.php?key=fe5aac9e58e45867ebaa1ac44e214505'
@@ -16,16 +17,19 @@ def BuildReq(url):
     return req
 
 if __name__ == '__main__':
+    socket.setdefaulttimeout(6)
     while 1:
-        fp = open('data.html','wb')
+        fp = open('proxy.txt','r')
+        proxys = fp.readlines()
+        fp.close()
 
-        proxys = open('proxy.txt','r').readlines()
         num = random.randint(0,len(proxys))
         proxy_addr = proxys.pop(num).strip('\n')
-        
+
         proxy_fp = open('proxy.txt','w') 
         for proxy in proxys:
             proxy_fp.write(proxy)
+        proxy_fp.close()
 
         print('-------><--------')
         print(time.strftime('%c',time.localtime()))
@@ -36,7 +40,6 @@ if __name__ == '__main__':
         
         try:
             data = opener.open(req).read()
-            fp.write(data)
         except:
             print('Error!')
         else:
