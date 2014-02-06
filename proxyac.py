@@ -4,7 +4,10 @@ import time
 import socket
 
 user_agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25"
-access_url = 'http://www.hd4fans.org/promotionlink.php?key=fe5aac9e58e45867ebaa1ac44e214505'
+access_url = [
+             'http://hdcmct.org/promotionlink.php?key=1ce5393e2800789fe80502a9ee1386ef',
+             'http://www.hd4fans.org/promotionlink.php?key=fe5aac9e58e45867ebaa1ac44e214505'
+             ]
 
 def BuildOpener(proxy_addr):
     proxy_handler = urllib.request.ProxyHandler({'http': proxy_addr})
@@ -36,14 +39,20 @@ if __name__ == '__main__':
         print(proxy_addr)
 
         opener = BuildOpener(proxy_addr)
-        req = BuildReq(access_url)
         
-        try:
-            data = opener.open(req).read()
-        except:
-            print('Error!')
-        else:
-            print('succeeded!')
+        success_flg = 0
+
+        for url in access_url:
+            req = BuildReq(url)
+            try:
+                data = opener.open(req).read()
+            except:
+                print('Error!')
+            else:
+                print('succeeded!')
+                success_flg = 1
+
+        if success_flg != 0:
             time.sleep(100)
 
 
