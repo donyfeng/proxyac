@@ -7,7 +7,7 @@ lines = fp.readlines()
 port_flag = 0
 for line in lines:
     if port_flag == 0:
-        ip = re.findall(r'\d+\.\d+\.\d+\.\d+',line)
+        ip = re.findall(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}',line)
         if ip:
             ip = ip[0]
             port_flag = 1
