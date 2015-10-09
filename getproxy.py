@@ -17,5 +17,3 @@ if __name__ == '__main__':
         data = urllib.request.urlopen(req).read()
         fp.write(data.decode('utf-8'))
 
-
-
