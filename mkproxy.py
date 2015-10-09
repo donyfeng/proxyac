@@ -1,7 +1,7 @@
 import re
 import os
 
-proxyhtml = open('proxy.html','r',encoding='gbk')
+proxyhtml = open('proxy.html','r',encoding='utf-8')
 proxys = []
 if os.path.isfile('proxy.txt'):
     proxytxt  = open('proxy.txt','r')

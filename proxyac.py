@@ -5,8 +5,9 @@ import socket
 
 user_agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25"
 access_url = [
-             'http://hdcmct.org/promotionlink.php?key=1ce5393e2800789fe80502a9ee1386ef',
-             'http://www.hd4fans.org/promotionlink.php?key=fe5aac9e58e45867ebaa1ac44e214505'
+             "http://hdcmct.org/promotionlink.php?key=1ce5393e2800789fe80502a9ee1386ef",
+             "http://www.hd4fans.org/promotionlink.php?key=fe5aac9e58e45867ebaa1ac44e214505",
+	         "https://hdbiger.org/promotionlink.php?key=74ce375e2f6a64d4fabcabd4f672bd26"
              ]
 
 def BuildOpener(proxy_addr):
@@ -54,8 +55,4 @@ if __name__ == '__main__':
 
         if success_flg != 0:
             time.sleep(100)
-
-
-
-    
 
